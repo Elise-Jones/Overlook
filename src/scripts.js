@@ -18,8 +18,6 @@ let roomData;
 
 const start = () => {
   Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms')]).then((data) => {
-    
-    console.log(data)
     userData = data[0].customers;
     console.log('userdata', userData)
     bookingData = data[1].bookings
