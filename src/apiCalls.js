@@ -7,7 +7,7 @@ const fetchAPI = (dataType) => {
 };
 
 const errorHandling = (err) => {
-  alert(`${err.name}: ${err.message}!\nWhat's Cookin failed to obtain data from the server.`);
+  alert(`${err.name}: ${err.message}!\nOverlook failed to obtain data from the server.`);
 };
 
 export { fetchAPI }
