@@ -6,7 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-import { getRandomCustomer } from './user';
+import { getRandomCustomer } from './customer.js';
 import { fetchAPI } from './apiCalls'
 import { calculatePrice } from './calculate-price';
 import { renderTotalPrice } from './domUpdates';
