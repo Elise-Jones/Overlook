@@ -1,12 +1,12 @@
 const getRandomIndex = (usersLength) => {
   return Math.floor(Math.random() * usersLength);
 };
-const getRandomUser = (userData) => {
-  if (userData) {
-    return userData[getRandomIndex(userData.length)];
+const getRandomCustomer = (customerData) => {
+  if (customerData) {
+    return customerData[getRandomIndex(customerData.length)];
   } else {
     return "user data not found";
   }
 }
   
-export { getRandomUser, getRandomIndex}
+export { getRandomCustomer, getRandomIndex}
