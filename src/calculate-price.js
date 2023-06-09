@@ -1,28 +1,20 @@
-const filterAlreadyBookedRooms = (currentCustomer, bookingData) => {
-  const booked = bookingData.filter((room) => {
-    return room.userID === currentCustomer.id;
-  });
+import { filterAlreadyBookedRooms} from '../src/filter-functions';
 
-  if (booked.length === 0) {
-    return "You have no bookings yet!";
-  }
-  return booked;
-};
 
 const calculatePrice = (currentCustomer, bookingData, roomData) => {
-  const array = filterAlreadyBookedRooms(currentCustomer, bookingData);
+  const array = filterAlreadyBookedRooms(
+    currentCustomer,
+    bookingData,
+    roomData
+  );
   if (array === "You have no bookings yet!") {
     return "You have not booked with us yet!";
   }
-  const getTotal = roomData.reduce((total, room) => {
-    array.forEach((alreadybookedroom) => {
-      if (room.number === alreadybookedroom.roomNumber) {
-        total += room.costPerNight;
-      }
-    });
-    return total;
+  const calctotal = array.reduce((acc, room) => {
+    acc += room.costPerNight;
+    return acc;
   }, 0);
-  return `$${getTotal.toFixed(2)}`;
+  return `$${calctotal.toFixed(2)}`;
 };
 
-export { filterAlreadyBookedRooms, calculatePrice };
+export { calculatePrice };
