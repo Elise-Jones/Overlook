@@ -6,12 +6,14 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
         roomInfo.number === bookedroom.roomNumber
       ) {
         array.push({
+          dateBooked: bookedroom.date,
           roomNumber: roomInfo.number,
-          costPerNight: roomInfo.costPerNight,
           roomType: roomInfo.roomType,
           bidet: roomInfo.bidet,
           bedSize: roomInfo.bedSize,
-          numBeds: roomInfo.numBeds
+          numBeds: roomInfo.numBeds,
+          costPerNight: roomInfo.costPerNight,
+          id: bookedroom.id
         });
       }
     });
@@ -24,12 +26,10 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
   return booked
 };
 
-
-const filterAvailableRoomsByDate = (dateValue, bookingData) => {
-  const avail = bookingData.filter((room) => {
-      return room.date !== dateValue
-     })
-    return avail
-  }
-
+const filterAvailableRoomsByDate = (dateValue) => {
+  const todaysDate = new Date().toJSON().slice(0, 10).split('-').join('/')
+  const avail = bookings.filter((room) => {
+    return room.date !== dateValue && todaysDate < room.date
+   })
+}
   export { filterAlreadyBookedRooms, filterAvailableRoomsByDate }

@@ -11,32 +11,37 @@ describe('filterAlreadyBookedRooms', () => {
   it('should return any booked rooms for the current customer', () => {
     const currentCustomer = customerData[12]
     const bookedrooms = filterAlreadyBookedRooms(currentCustomer, bookingData, roomData);
-    const currentCustomer2 = customerData[0]
+    const currentCustomer2 = customerData[8]
     const bookedrooms2 = filterAlreadyBookedRooms(currentCustomer2, bookingData, roomData);
-    console.log('2', bookedrooms2)
-
-    expect(bookedrooms).to.deep.equal([{
-      roomNumber: 12,
-      costPerNight: 172.09,
-      roomType: 'single room',
-      bidet: false,
-      bedSize: 'twin'
-    },
-    {
-      roomNumber: 11,
-      costPerNight: 207.24,
-      roomType: 'single room',
-      bidet: true,
-      bedSize: 'twin'
-    }
-  ]);
-    expect(bookedrooms2).to.deep.equal([
+    expect(bookedrooms).to.deep.equal([
       {
         roomNumber: 12,
-        costPerNight: 172.09,
         roomType: 'single room',
         bidet: false,
-        bedSize: 'twin'
+        bedSize: 'twin',
+        numBeds: 2,
+        costPerNight: 172.09,
+        id: '5fwrgu4i7k55hl6t6'
+      },
+      {
+        roomNumber: 11,
+        roomType: 'single room',
+        bidet: true,
+        bedSize: 'twin',
+        numBeds: 2,
+        costPerNight: 207.24,
+        id: '5fwrgu4i7k55hl6ti'
+      }
+    ]);
+    expect(bookedrooms2).to.deep.equal([
+      {
+        roomNumber: 15,
+        roomType: 'residential suite',
+        bidet: false,
+        bedSize: 'full',
+        numBeds: 1,
+        costPerNight: 294.56,
+        id: '5fwrgu4i7k55hl6sz'
       }
     ]) 
 
@@ -52,9 +57,7 @@ describe('filterAvailableRoomsByDate', () => {
   it('should be a function', () => {
     expect(filterAvailableRoomsByDate).to.be.a('function')
   })
-  it('based on customers date preference it should return only available rooms', () => {
+  it('based on customers date preference it should return only available rooms in the future', () => {
     expect()
   })
 })
-
-//didn't sort the past bookings from the future
