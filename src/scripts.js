@@ -9,19 +9,21 @@ import './images/turing-logo.png'
 import { getRandomCustomer } from './customer.js';
 import { fetchAPI } from './apiCalls'
 import { calculatePrice } from './calculate-price';
-import { renderTotalPrice } from './domUpdates';
+import { renderTotalPrice, renderBookedRooms } from './domUpdates';
+import { filterAlreadyBookedRooms } from './filter-functions'
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
 //GLOBAL VARIABLE
-// let currentCustomer;
-// let bookingData
-// let customerData;
-// let roomData;
+let currentCustomer;
+let bookingData
+let customerData;
+let roomData;
 
 //QUERY SELECTORS
-const userTotal = document.querySelector('.usertotal')
-console.log(userTotal.innerText)
+const userTotal = document.querySelector('.usertotal');
+const bookingContainer = document.querySelector(".booking-container")
+console.log(bookingContainer)
 
 const start = () => {
   Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms')]).then((data) => {
@@ -32,7 +34,9 @@ const start = () => {
     console.log('roomdaata', roomData)
     currentCustomer = getRandomCustomer(customerData);
     currentCustomer.totalPrice = calculatePrice(currentCustomer, bookingData, roomData)
+    const customerBookings = filterAlreadyBookedRooms(currentCustomer, bookingData, roomData)
     renderTotalPrice(currentCustomer)
+    renderBookedRooms(customerBookings)
   });
  
 };
@@ -40,4 +44,4 @@ const start = () => {
 //EVENT LISTENERS
 window.addEventListener('load', start);
 
-export { userTotal }
+export { userTotal, bookingContainer }
