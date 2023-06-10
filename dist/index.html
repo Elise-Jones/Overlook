@@ -11,7 +11,7 @@
     <div class="calendarsearch">
       <form>
         <label>Wanna get away</label>
-        <input class="startdate" type="date"  name="" id="formDate" required>
+        <input class="startdate" id="datepicker" type="date"  name="" min required>
         <button type="submit">search</button>
       </form>
     </div>
@@ -23,11 +23,8 @@
   <main id="allbookings">
     <h1> your bookings</h1>
     <div class="booking-container">
-      <!-- RENDERED bookings CARDS WILL GO HERE -->
     </div>
-
   </main>
-
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
