@@ -32,7 +32,9 @@ const startDate = document.querySelector(".startdate")
 const byDateContainer = document.querySelector(".bydate")
 const datePicker = document.getElementById("datepicker")
 const roomTypeButtonHolder = document.querySelector(".buttonholder")
-
+const form = document.querySelector(".buttonselection")
+const former = document.getElementById('myform');
+const submitButton = document.getElementById('submitbutton');
 
 const start = () => {
   Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms')]).then((data) => {
@@ -45,25 +47,26 @@ const start = () => {
     renderTotalPrice(currentCustomer) 
     renderBookedRooms(customerBookings, bookingContainer)
     datePicker.min= new Date().toISOString().split("T")[0];
-
   });
- 
 };
 
 //EVENT LISTENERS
 window.addEventListener('load', start);
+datePicker.addEventListener('input', () => {
+  calendarSubmitButton.disabled = false; // Enable the submit button when the date is entered
+});
+
 calendarSubmitButton.addEventListener('click', (e) => {
   e.preventDefault()
   dateMatchedArray = createDisplayingObjectForDate(startDate.value, roomData, bookingdata)
   hideDomElement(bookingContainer)
   showDomElement(byDateContainer)
+  showDomElement(form)
   renderBookedRooms(dateMatchedArray, byDateContainer)
   })
 
-  roomTypeButtonHolder.addEventListener('click', (e)=>{
-    console.log(dateMatchedArray)
-  console.log(e.target.value)
-   let type = filterByType(dateMatchedArray, e.target.value)
-   console.log(type)
+roomTypeButtonHolder.addEventListener('click', (e) => {
+   let roomTypeArray = filterByType(dateMatchedArray, e.target.value)
+   renderBookedRooms(roomTypeArray, byDateContainer)
   })
 export { userTotal, bookingContainer }

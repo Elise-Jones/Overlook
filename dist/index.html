@@ -9,15 +9,15 @@
 <body>
   <nav class="calendarnav">
     <div class="calendarsearch">
-      <form>
+      <form id="myform">
         <label>Wanna get away</label>
         <input class="startdate" id="datepicker" type="date"  name=""  required> 
-        <button class="calendarsubmitbutton" type="submit">search</button>
+        <button class="calendarsubmitbutton" type="submit" id="submitbutton" disabled >search</button>
       </form>
     </div>
     <div class="buttonholder">
-        <p>Choose Room Type</p>
-        <form>
+        <form class="buttonselection hidden" >
+          <label>Choose you room</label>
           <input type="button" id="single" name="roomtype" value="single room">
           <label for="single"></label>
           <input type="button" id="junior" name="roomtype" value="junior suite">
