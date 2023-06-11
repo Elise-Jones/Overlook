@@ -5,6 +5,7 @@ body{
 .calendarnav{
   display: flex;
   border: 4px solid red;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -28,17 +29,22 @@ body{
   flex-direction: column;
 }
 
-#allbookings {
+/* #allbookings { */
   /* display: flex; */
   /* border: 4px solid blue;
   height: 500px; */
+/* } */
+button {
+  cursor: pointer
 }
-.booking-container {
+
+.booking-container, .bydate {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
 }
+
 .bookingcard {
   width: 250px;
   height: 200px;
@@ -48,4 +54,13 @@ body{
   margin-right: 30px;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.buttonholder {
+  display: flex;
+  align-items: center;
 }

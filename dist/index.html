@@ -11,9 +11,22 @@
     <div class="calendarsearch">
       <form>
         <label>Wanna get away</label>
-        <input class="startdate" id="datepicker" type="date"  name="" min required>
-        <button type="submit">search</button>
+        <input class="startdate" id="datepicker" type="date"  name=""  required> 
+        <button class="calendarsubmitbutton" type="submit">search</button>
       </form>
+    </div>
+    <div class="buttonholder">
+        <p>Choose Room Type</p>
+        <form>
+          <input type="button" id="single" name="roomtype" value="Single Room">
+          <label for="single"></label>
+          <input type="button" id="junior" name="roomtype" value="Junior Suite">
+          <label for="junior"></label>
+          <input type="button" id="suite" name="roomtype" value="Suite">
+          <label for="suite"></label>
+          <input type="button" id="presidential" name="roomtype" value="Residential Suite">
+          <label for="residential suite"></label>
+        </form>
     </div>
     <section class="userdashboard">
       <h1>welcome tony</h1>
@@ -23,6 +36,10 @@
   <main id="allbookings">
     <h1> your bookings</h1>
     <div class="booking-container">
+      <!-- Bookings go here -->
+    </div>
+    <div class="bydate hidden">
+      <!-- Bookings go here -->
     </div>
   </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
