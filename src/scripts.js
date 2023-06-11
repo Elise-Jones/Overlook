@@ -30,6 +30,7 @@ const bookingContainer = document.querySelector(".booking-container")
 const calendarSubmitButton = document.querySelector('.calendarsubmitbutton')
 const startDate = document.querySelector(".startdate")
 const byDateContainer = document.querySelector(".bydate")
+const datePicker = document.getElementById("datepicker")
 
 
 const start = () => {
@@ -42,8 +43,11 @@ const start = () => {
     currentCustomer = getRandomCustomer(customerData);
     currentCustomer.totalPrice = calculatePrice(currentCustomer, bookingdata, roomData)
     const customerBookings = filterAlreadyBookedRooms(currentCustomer, bookingdata, roomData)
+    console.log(customerBookings.length)
     renderTotalPrice(currentCustomer) 
     renderBookedRooms(customerBookings, bookingContainer)
+    datePicker.min= new Date().toISOString().split("T")[0];
+    console.log(datePicker)
   });
  
 };
