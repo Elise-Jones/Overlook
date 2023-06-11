@@ -33,7 +33,7 @@ body{
   /* border: 4px solid blue;
   height: 500px; */
 }
-.booking-container {
+.booking-container .bydate {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -48,4 +48,8 @@ body{
   margin-right: 30px;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.hidden {
+  display: none;
 }

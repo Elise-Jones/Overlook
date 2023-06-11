@@ -1,3 +1,5 @@
+import { bookingData } from "../test/sampleData";
+
 const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
   const booked = bookingData.reduce((array, bookedroom) => {
     roomData.forEach((roomInfo) => {
@@ -27,9 +29,39 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
 };
 
 const filterAvailableRoomsByDate = (dateValue) => {
-  const todaysDate = new Date().toJSON().slice(0, 10).split('-').join('/')
-  const avail = bookings.filter((room) => {
-    return room.date !== dateValue && todaysDate < room.date
+  const ma = dateValue.split('-').join('/')
+
+  const avail = bookingData.filter((room) => {
+    console.log(bookingData.length)
+    return room.date !== ma && ma < room.date
    })
+   return avail
 }
-  export { filterAlreadyBookedRooms, filterAvailableRoomsByDate }
+
+const createDisplayingObjectForDate = ( dateValue, roomData) => {
+  const only = filterAvailableRoomsByDate(dateValue)
+  return roomData.reduce((acc, roomInfo) => {
+    only.forEach((r) => {
+      if(roomInfo.number === r.roomNumber){
+        acc.push({
+          roomNumber: roomInfo.number,
+          roomType: roomInfo.roomType,
+          bidet: roomInfo.bidet,
+          bedSize: roomInfo.bedSize,
+          numBeds: roomInfo.numBeds,
+          costPerNight: roomInfo.costPerNight,
+          id: r.id
+        })
+      }
+    })
+    return acc
+  }, [])
+}
+
+
+const filterByType = (dateMatchedArray, roomTypeValue) => {
+  return dateMatchedArray.filter((room) => {
+   return room.roomType.split(' ').join('*') === roomTypeValue.split(' ').join('*')
+  })
+}
+  export { filterAlreadyBookedRooms, filterAvailableRoomsByDate, createDisplayingObjectForDate, filterByType}
