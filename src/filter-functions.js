@@ -1,5 +1,3 @@
-
-
 const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
   const booked = bookingData.reduce((array, bookedroom) => {
     roomData.forEach((roomInfo) => {
@@ -28,13 +26,6 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
   return booked
 };
 
-// const filterAvailableRoomsByDate = (dateValue, bookingData) => {
-//   const ma = dateValue.split('-').join('/')
-//   const avail = bookingData.filter((room) => {
-//     return room.date !== ma && ma < room.date
-//    })
-//    return avail
-// }
 
 const findAvailableRooms = (selectedDate, rooms, bookings) => {
   const filteredRooms = bookings.filter((booking) => {
@@ -44,33 +35,18 @@ const findAvailableRooms = (selectedDate, rooms, bookings) => {
     return room.roomNumber});
   const availableRooms = rooms.filter((room) => {
     return !unavailableRooms.includes(room.number)});
+    
+    
+    if(availableRooms.length === 0){
+      return `Sorry There are no available rooms that day.`
+    }
   return availableRooms
 }
-const createDisplayingObjectForDate = ( dateValue, roomData, bookingData) => {
-  const only = filterAvailableRoomsByDate(dateValue, bookingData)
-  return roomData.reduce((acc, roomInfo) => {
-    only.forEach((r) => {
-      if(roomInfo.number === r.roomNumber){
-        acc.push({
-          dateBooked: r.date,
-          roomNumber: roomInfo.number,
-          roomType: roomInfo.roomType,
-          bidet: roomInfo.bidet,
-          bedSize: roomInfo.bedSize,
-          numBeds: roomInfo.numBeds,
-          costPerNight: roomInfo.costPerNight,
-          id: r.id
-        })
-      }
-    })
-    return acc
-  }, [])
-}
-
 
 const filterByType = (dateMatchedArray, roomTypeValue) => {
   return dateMatchedArray.filter((room) => {
    return room.roomType.split(' ').join('*') === roomTypeValue.split(' ').join('*')
   })
 }
-  export { filterAlreadyBookedRooms, findAvailableRooms, createDisplayingObjectForDate, filterByType}
+  export { filterAlreadyBookedRooms, findAvailableRooms, 
+    filterByType}
