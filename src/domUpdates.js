@@ -1,6 +1,6 @@
 import {  userTotal } from './scripts.js'
-const renderTotalPrice = (currentCustomer) => {
-  userTotal.innerText = currentCustomer.totalPrice
+const renderMessage = (element, message) => {
+  element.innerText = message
 }
 
 const renderBookedRooms = (array, element) => {
@@ -29,4 +29,4 @@ function hideDomElement(element) {
  
 }
 
-export { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook }
+export {  renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook, renderMessage }
