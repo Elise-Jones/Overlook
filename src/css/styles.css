@@ -34,8 +34,10 @@ body{
   /* border: 4px solid blue;
   height: 500px; */
 /* } */
-button {
-  cursor: pointer
+input[type="button"], .calendarsubmitbutton {
+  cursor: pointer;
+  border-radius: 50vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .booking-container, .bydate {
@@ -45,7 +47,7 @@ button {
   justify-content: space-between;
 }
 
-.bookingcard {
+.bookingcard, .booknowcard{
   width: 250px;
   height: 200px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
