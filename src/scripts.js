@@ -9,8 +9,8 @@ import './images/turing-logo.png'
 import { getRandomCustomer } from './customer.js';
 import { fetchAPI } from './apiCalls'
 import { calculatePrice } from './calculate-price';
-import { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement } from './domUpdates';
-import { filterAlreadyBookedRooms, createDisplayingObjectForDate, filterByType } from './filter-functions'
+import { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook } from './domUpdates';
+import { filterAlreadyBookedRooms, showAvailableRooms, createDisplayingObjectForDate, filterByType } from './filter-functions'
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
@@ -35,6 +35,7 @@ const roomTypeButtonHolder = document.querySelector(".buttonholder")
 const form = document.querySelector(".buttonselection")
 const former = document.getElementById('myform');
 const submitButton = document.getElementById('submitbutton');
+const booknowcard = document.querySelector('.booknowcard')
 
 const start = () => {
   Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms')]).then((data) => {
@@ -53,20 +54,28 @@ const start = () => {
 //EVENT LISTENERS
 window.addEventListener('load', start);
 datePicker.addEventListener('input', () => {
-  calendarSubmitButton.disabled = false; // Enable the submit button when the date is entered
+  calendarSubmitButton.disabled = false;
 });
 
 calendarSubmitButton.addEventListener('click', (e) => {
   e.preventDefault()
-  dateMatchedArray = createDisplayingObjectForDate(startDate.value, roomData, bookingdata)
+  console.log(dateMatchedArray)
+  dateMatchedArray = showAvailableRooms(startDate.value, roomData, bookingdata)
   hideDomElement(bookingContainer)
   showDomElement(byDateContainer)
   showDomElement(form)
-  renderBookedRooms(dateMatchedArray, byDateContainer)
+  renderRoomsToBook(dateMatchedArray, byDateContainer)
   })
 
 roomTypeButtonHolder.addEventListener('click', (e) => {
    let roomTypeArray = filterByType(dateMatchedArray, e.target.value)
-   renderBookedRooms(roomTypeArray, byDateContainer)
+   showDomElement(byDateContainer)
+   renderRoomsToBook(roomTypeArray, byDateContainer)
   })
+// booknowcard.addEventListener('click', (e) => {
+//   console.log(e.target)
+// })
+byDateContainer.addEventListener('click', (e) => {
+  console.log(e.target)
+})
 export { userTotal, bookingContainer }

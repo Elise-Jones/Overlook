@@ -30,14 +30,22 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
 
 const filterAvailableRoomsByDate = (dateValue, bookingData) => {
   const ma = dateValue.split('-').join('/')
-console.log(ma)
   const avail = bookingData.filter((room) => {
-    console.log(bookingData.length)
     return room.date !== ma && ma < room.date
    })
    return avail
 }
 
+const showAvailableRooms = (selectedDate, rooms, bookings) => {
+  const filteredRooms = bookings.filter((booking) => {
+    return booking.date === selectedDate.split('-').join('/')
+  });
+  const unavailableRooms = filteredRooms.map((room) => {
+    return room.roomNumber});
+  const availableRooms = rooms.filter((room) => {
+    return !unavailableRooms.includes(room.number)});
+  return availableRooms
+}
 const createDisplayingObjectForDate = ( dateValue, roomData, bookingData) => {
   const only = filterAvailableRoomsByDate(dateValue, bookingData)
   return roomData.reduce((acc, roomInfo) => {
@@ -65,4 +73,4 @@ const filterByType = (dateMatchedArray, roomTypeValue) => {
    return room.roomType.split(' ').join('*') === roomTypeValue.split(' ').join('*')
   })
 }
-  export { filterAlreadyBookedRooms, filterAvailableRoomsByDate, createDisplayingObjectForDate, filterByType}
+  export { filterAlreadyBookedRooms, showAvailableRooms, createDisplayingObjectForDate, filterByType}

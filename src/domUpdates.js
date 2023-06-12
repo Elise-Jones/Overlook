@@ -11,6 +11,15 @@ const renderBookedRooms = (array, element) => {
     </article>`
   })
 }
+
+const renderRoomsToBook = (array, element) => {
+  element.innerHTML = ''
+  array.forEach((room) => {
+    element.innerHTML += `<article class="booknowcard" id="${room.id}">
+    <br> Room Type: ${room.roomType} <br> room number : ${room.number} <br> Number of Beds: ${room.numBeds} <br> Cost Per Night: ${room.costPerNight}
+   <input type="button" id="booknow" value="book now"> </article>`
+  })
+}
 function showDomElement(element) {
   element.classList.remove("hidden");
 }
@@ -20,4 +29,4 @@ function hideDomElement(element) {
  
 }
 
-export { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement}
+export { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook }
