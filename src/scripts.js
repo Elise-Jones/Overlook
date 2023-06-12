@@ -7,22 +7,18 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 import { getRandomCustomer } from './customer.js';
-import { fetchAPI } from './apiCalls'
+import { assignPromises, postAPI } from './apiCalls'
 import { calculatePrice } from './calculate-price';
 import { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook } from './domUpdates';
 import { filterAlreadyBookedRooms, showAvailableRooms, createDisplayingObjectForDate, filterByType } from './filter-functions'
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
 //GLOBAL VARIABLE
 let currentCustomer;
-let bookingdata
+let bookingdata;
 let customerData;
 let roomData;
-let dateMatchedArray
-
-
-
+let dateMatchedArray;
 
 //QUERY SELECTORS
 const userTotal = document.querySelector('.usertotal');
@@ -38,7 +34,7 @@ const submitButton = document.getElementById('submitbutton');
 const booknowcard = document.querySelector('.booknowcard')
 
 const start = () => {
-  Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms')]).then((data) => {
+  assignPromises().then((data) => {
     customerData = data[0].customers;
     bookingdata = data[1].bookings
     roomData = data[2].rooms
@@ -52,7 +48,8 @@ const start = () => {
 };
 
 //EVENT LISTENERS
-window.addEventListener('load', start);
+window.addEventListener('load', start)
+
 datePicker.addEventListener('input', () => {
   calendarSubmitButton.disabled = false;
 });
@@ -66,16 +63,39 @@ calendarSubmitButton.addEventListener('click', (e) => {
   showDomElement(form)
   renderRoomsToBook(dateMatchedArray, byDateContainer)
   })
+  const getBack = () => {
+    assignPromises().then((data) => {
+     customerData = data[0].customers;
+     bookingdata = data[1].bookings
+     roomData = data[2].rooms
+  })
+  }
 
 roomTypeButtonHolder.addEventListener('click', (e) => {
    let roomTypeArray = filterByType(dateMatchedArray, e.target.value)
    showDomElement(byDateContainer)
    renderRoomsToBook(roomTypeArray, byDateContainer)
   })
-// booknowcard.addEventListener('click', (e) => {
-//   console.log(e.target)
-// })
+
 byDateContainer.addEventListener('click', (e) => {
-  console.log(e.target)
+  console.log('startdate', startDate.value)
+  let roomnumber;
+  if(e.target.id === "booknow"){
+    roomnumber = e.target.parentNode.id
+    console.log(typeof roomnumber)
+    postAPI({userID: currentCustomer.id, date: startDate.value.split('-').join('/'), roomNumber: parseInt(roomnumber)})
+    .then(() => {getBack()
+      console.log("boookiinngg", bookingdata)
+    })
+    .catch((error) => {console.log(error)
+    })
+    
+    
+  } 
+  
+  
+
 })
+
+
 export { userTotal, bookingContainer }

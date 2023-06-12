@@ -6,7 +6,7 @@ const renderTotalPrice = (currentCustomer) => {
 const renderBookedRooms = (array, element) => {
   element.innerHTML = ''
   array.forEach((room) => {
-    element.innerHTML += `<article class="bookingcard" id="${room.id}">
+    element.innerHTML += `<article class="bookingcard" id="${room.roomNumber}">
    Date Booked: ${room.dateBooked} <br> Room Type: ${room.roomType} <br> room number : ${room.roomNumber} <br> Number of Beds: ${room.numBeds} <br> Cost Per Night: ${room.costPerNight}
     </article>`
   })
@@ -15,7 +15,7 @@ const renderBookedRooms = (array, element) => {
 const renderRoomsToBook = (array, element) => {
   element.innerHTML = ''
   array.forEach((room) => {
-    element.innerHTML += `<article class="booknowcard" id="${room.id}">
+    element.innerHTML += `<article class="booknowcard" id="${room.number}">
     <br> Room Type: ${room.roomType} <br> room number : ${room.number} <br> Number of Beds: ${room.numBeds} <br> Cost Per Night: ${room.costPerNight}
    <input type="button" id="booknow" value="book now"> </article>`
   })
