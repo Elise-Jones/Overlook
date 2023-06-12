@@ -1,6 +1,7 @@
 import { bookingData } from "../test/sampleData";
 
 const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
+  console.log(bookingData)
   const booked = bookingData.reduce((array, bookedroom) => {
     roomData.forEach((roomInfo) => {
       if (
