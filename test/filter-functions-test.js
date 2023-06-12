@@ -233,12 +233,12 @@ describe('createDisplayingObjectForDate', () => {
     it('should be a function', () => {
       expect(filterAvailableRoomsByDate).to.be.a('function')
     })
-    it('should return rooms based on selected roomType', () => {
+    it.only('should return rooms based on selected roomType', () => {
       const filteredDates = createDisplayingObjectForDate("2021/11/30", roomData);
       const arrayByType = filterByType(filteredDates,"suite")
-      
+      console.log("fillll" ,filteredDates)
       const arrayByType2 = filterByType(filteredDates,"single room")
-      console.log("onlu suite2", arrayByType2)
+      console.log("onlu suite2", arrayByType)
       expect(arrayByType).to.deep.equal([  {
         roomNumber: 2,
         roomType: 'suite',

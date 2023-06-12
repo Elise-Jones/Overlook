@@ -9,8 +9,8 @@ import './images/turing-logo.png'
 import { getRandomCustomer } from './customer.js';
 import { assignPromises, postAPI } from './apiCalls'
 import { calculatePrice } from './calculate-price';
-import { renderTotalPrice, renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook } from './domUpdates';
-import { filterAlreadyBookedRooms, showAvailableRooms, createDisplayingObjectForDate, filterByType } from './filter-functions'
+import {  renderBookedRooms, showDomElement, hideDomElement, renderRoomsToBook, renderMessage } from './domUpdates';
+import { filterAlreadyBookedRooms, findAvailableRooms, createDisplayingObjectForDate, filterByType } from './filter-functions'
 
 
 //GLOBAL VARIABLE
@@ -32,6 +32,8 @@ const form = document.querySelector(".buttonselection")
 const former = document.getElementById('myform');
 const submitButton = document.getElementById('submitbutton');
 const booknowcard = document.querySelector('.booknowcard')
+const customerWelcome = document.querySelector('h1')
+const bookingTitle = document.querySelector('h3')
 
 const start = () => {
   assignPromises().then((data) => {
@@ -41,7 +43,8 @@ const start = () => {
     currentCustomer = getRandomCustomer(customerData);
     currentCustomer.totalPrice = calculatePrice(currentCustomer, bookingdata, roomData)
     const customerBookings = filterAlreadyBookedRooms(currentCustomer, bookingdata, roomData)
-    renderTotalPrice(currentCustomer) 
+    renderMessage(userTotal, `Your Total is ${currentCustomer.totalPrice}`)
+    renderMessage(customerWelcome, `Welcome ${currentCustomer.name}`)
     renderBookedRooms(customerBookings, bookingContainer)
     datePicker.min= new Date().toISOString().split("T")[0];
   });
@@ -57,11 +60,13 @@ datePicker.addEventListener('input', () => {
 calendarSubmitButton.addEventListener('click', (e) => {
   e.preventDefault()
   console.log(dateMatchedArray)
-  dateMatchedArray = showAvailableRooms(startDate.value, roomData, bookingdata)
+  dateMatchedArray = findAvailableRooms(startDate.value, roomData, bookingdata)
   hideDomElement(bookingContainer)
   showDomElement(byDateContainer)
   showDomElement(form)
+  
   renderRoomsToBook(dateMatchedArray, byDateContainer)
+  renderMessage(bookingTitle, `All rooms available on ${startDate.value.split('-').join('/')}`)
   })
   const getBack = () => {
     assignPromises().then((data) => {
@@ -73,8 +78,11 @@ calendarSubmitButton.addEventListener('click', (e) => {
 
 roomTypeButtonHolder.addEventListener('click', (e) => {
    let roomTypeArray = filterByType(dateMatchedArray, e.target.value)
+   console.log(e.target.value)
+   console.log("roomtypearray", roomTypeArray)
    showDomElement(byDateContainer)
    renderRoomsToBook(roomTypeArray, byDateContainer)
+   renderMessage(bookingTitle, `${e.target.value}'s available on ${startDate.value.split('-').join('/')}`)
   })
 
 byDateContainer.addEventListener('click', (e) => {
@@ -98,4 +106,4 @@ byDateContainer.addEventListener('click', (e) => {
 })
 
 
-export { userTotal, bookingContainer }
+export { userTotal, bookingContainer, customerWelcome }

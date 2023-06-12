@@ -1,7 +1,6 @@
-import { bookingData } from "../test/sampleData";
+
 
 const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
-  console.log(bookingData)
   const booked = bookingData.reduce((array, bookedroom) => {
     roomData.forEach((roomInfo) => {
       if (
@@ -29,15 +28,15 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
   return booked
 };
 
-const filterAvailableRoomsByDate = (dateValue, bookingData) => {
-  const ma = dateValue.split('-').join('/')
-  const avail = bookingData.filter((room) => {
-    return room.date !== ma && ma < room.date
-   })
-   return avail
-}
+// const filterAvailableRoomsByDate = (dateValue, bookingData) => {
+//   const ma = dateValue.split('-').join('/')
+//   const avail = bookingData.filter((room) => {
+//     return room.date !== ma && ma < room.date
+//    })
+//    return avail
+// }
 
-const showAvailableRooms = (selectedDate, rooms, bookings) => {
+const findAvailableRooms = (selectedDate, rooms, bookings) => {
   const filteredRooms = bookings.filter((booking) => {
     return booking.date === selectedDate.split('-').join('/')
   });
@@ -74,4 +73,4 @@ const filterByType = (dateMatchedArray, roomTypeValue) => {
    return room.roomType.split(' ').join('*') === roomTypeValue.split(' ').join('*')
   })
 }
-  export { filterAlreadyBookedRooms, showAvailableRooms, createDisplayingObjectForDate, filterByType}
+  export { filterAlreadyBookedRooms, findAvailableRooms, createDisplayingObjectForDate, filterByType}
