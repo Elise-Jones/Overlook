@@ -1,4 +1,4 @@
-import { startDate } from "./scripts.js";
+import { startDate} from "./scripts.js";
 
 const renderMessage = (element, message) => {
   element.innerText = message;
@@ -14,23 +14,20 @@ const renderBookedRooms = (array, element) => {
 };
 
 const renderRoomsToBook = (array, element, bookingTitle) => {
-  console.log(bookingTitle);
   let todaysDate = new Date().toJSON().slice(0, 10);
   if (todaysDate > startDate.value) {
-    bookingTitle.innerText = "Choose a future date!";
     alert("Choose a future date");
     element.innerHTML = "";
-  } else {
-    renderMessage(
-      bookingTitle,
-      `All rooms available on ${startDate.value.split("-").join("/")}`
-    );
+   hideDomElement(bookingTitle)
+  } else if ( todaysDate < startDate.value) {
     element.innerHTML = "";
+    showDomElement(bookingTitle)
+    bookingTitle.innerText = `All rooms available on ${startDate.value.split("-").join("/")}`
     array.forEach((room) => {
       element.innerHTML += `<article class="booknowcard" id="${room.number}">
-    <br> Room Type: ${room.roomType} <br> room number : ${room.number} <br> Number of Beds: ${room.numBeds} <br> Cost Per Night: ${room.costPerNight}
+    <br> Room Type: ${room.roomType} <br> Room Number : ${room.number} <br> Number of Beds: $${room.numBeds} <br> Cost Per Night: ${room.costPerNight}
    <input type="button" id="booknow" value="book now"> </article>`;
-    });
+    });      
   }
 };
 

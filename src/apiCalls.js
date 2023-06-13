@@ -1,10 +1,15 @@
-import { customerData, bookingdata, roomData } from "./scripts.js";
 const fetchAPI = (dataType) => {
   return fetch(`http://localhost:3001/api/v1/${dataType}`)
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => errorHandling(err));
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Server error');
+    }
+    return response.json();
+  })
+  .catch(err => {
+    console.log('Error:', err);
+    alert(err)
+  });
 };
 
 const assignPromises = (id) => {
@@ -16,12 +21,6 @@ const assignPromises = (id) => {
   ]);
 };
 
-const errorHandling = (err) => {
-  alert(
-    `${err.name}: ${err.message}!\nOverlook failed to obtain data from the server.`
-  );
-};
-
 const getSingleCustomer = (id) => {
   return fetch(`http://localhost:3001/api/v1/customers/${id}`)
     .then((response) => {
@@ -31,21 +30,18 @@ const getSingleCustomer = (id) => {
 };
 
 const postAPI = (customer) => {
-  return fetch("http://localhost:3001/api/v1/bookings", {
-    method: "POST",
-    body: JSON.stringify(customer),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json.message))
-    .then((data) => {
-      if (data.message.includes("already")) {
-        throw new Error("Room already booked!");
-      }
+    return fetch("http://localhost:3001/api/v1/bookings", {
+      method: "POST",
+      body: JSON.stringify(customer),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch((err) => alert(err));
+      .then((response) => response.json())
+      .then((data) => { 
+        alert(`You booked room number ${data.newBooking.roomNumber} on ${data.newBooking.date}`)
+      })
+      .catch((err) => alert(err));
 };
 
 export { fetchAPI, postAPI, assignPromises, getSingleCustomer };
