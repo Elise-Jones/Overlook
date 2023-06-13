@@ -15,6 +15,14 @@ const errorHandling = (err) => {
   alert(`${err.name}: ${err.message}!\nOverlook failed to obtain data from the server.`);
 };
 
+const getSingleUser = (id) => {
+  return fetch(`http://localhost:3001/api/v1/customers/<${id}>`)
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => errorHandling(err));
+};
+
 const postAPI = (customer) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
@@ -34,4 +42,4 @@ const postAPI = (customer) => {
 }
 
 
-export { fetchAPI, postAPI, assignPromises }
+export { fetchAPI, postAPI, assignPromises, getSingleUser }
