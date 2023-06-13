@@ -16,6 +16,7 @@ import {
 } from "./filter-functions";
 
 //GLOBAL VARIABLE
+let customerData;
 let currentCustomer;
 let bookingdata;
 let roomData;
