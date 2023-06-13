@@ -28,6 +28,7 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
 
 
 const findAvailableRooms = (selectedDate, rooms, bookings) => {
+  
   const filteredRooms = bookings.filter((booking) => {
     return booking.date === selectedDate.split('-').join('/')
   });

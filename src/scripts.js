@@ -29,6 +29,7 @@ let customerData;
 let roomData;
 let dateMatchedArray;
 
+
 //QUERY SELECTORS
 const userTotal = document.querySelector(".usertotal");
 const bookingContainer = document.querySelector(".booking-container");
@@ -154,4 +155,4 @@ byDateContainer.addEventListener("click", (e) => {
   }
 });
 
-export { userTotal, bookingContainer, customerWelcome };
+export { userTotal, bookingContainer, customerWelcome, startDate };
