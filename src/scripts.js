@@ -29,6 +29,7 @@ let customerData;
 let roomData;
 let dateMatchedArray;
 
+
 //QUERY SELECTORS
 const userTotal = document.querySelector(".usertotal");
 const bookingContainer = document.querySelector(".booking-container");
@@ -40,6 +41,7 @@ const roomTypeButtonHolder = document.querySelector(".buttonholder");
 const form = document.querySelector(".buttonselection");
 const customerWelcome = document.querySelector("h1");
 const bookingTitle = document.querySelector("h3");
+datePicker.min = new Date().toJSON().slice(0, 10);
 
 const start = () => {
   assignPromises().then((data) => {
@@ -60,7 +62,7 @@ const start = () => {
     renderMessage(userTotal, `Your total spent: ${currentCustomer.totalPrice}`);
     renderMessage(customerWelcome, `Welcome ${currentCustomer.name}`);
     renderBookedRooms(customerBookings, bookingContainer);
-    datePicker.min = new Date().toISOString().split("T")[0];
+    
   });
 };
 
@@ -81,11 +83,8 @@ calendarSubmitButton.addEventListener("click", (e) => {
   showDomElement(byDateContainer);
   showDomElement(form);
 
-  renderRoomsToBook(dateMatchedArray, byDateContainer);
-  renderMessage(
-    bookingTitle,
-    `All rooms available on ${startDate.value.split("-").join("/")}`
-  );
+  renderRoomsToBook(dateMatchedArray, byDateContainer, bookingTitle);
+
 });
 
 const getBack = () => {
@@ -132,4 +131,4 @@ byDateContainer.addEventListener("click", (e) => {
   }
 });
 
-export { userTotal, bookingContainer, customerWelcome };
+export { userTotal, bookingContainer, customerWelcome, startDate };
