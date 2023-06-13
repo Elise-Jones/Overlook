@@ -40,12 +40,18 @@ const roomTypeButtonHolder = document.querySelector(".buttonholder");
 const form = document.querySelector(".buttonselection");
 const customerWelcome = document.querySelector("h1");
 const bookingTitle = document.querySelector("h3");
+const loginForm = document.getElementById("loginform")
+const userNameEntry = document.querySelector("#username")
+const passwordEntry = document.querySelector("#username")
 
 const start = () => {
   assignPromises().then((data) => {
+
+   
     customerData = data[0].customers;
     bookingdata = data[1].bookings;
     roomData = data[2].rooms;
+    console.log("customerdata", customerData)
     currentCustomer = getRandomCustomer(customerData);
     currentCustomer.totalPrice = calculatePrice(
       currentCustomer,
@@ -88,6 +94,14 @@ calendarSubmitButton.addEventListener("click", (e) => {
   );
 });
 
+loginForm.addEventListener('submit',(e)=>{
+  e.preventDefault()
+  
+    hideDomElement(loginForm)
+    showDomElement(bookingTitle)
+  
+
+})
 const getBack = () => {
   assignPromises().then((data) => {
     customerData = data[0].customers;
