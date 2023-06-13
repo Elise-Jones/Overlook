@@ -1,6 +1,28 @@
 body {
-  background-color: #F4FFFD;
-  font-family: 'Roboto', sans-serif;
+  background-color: #f4fffd;
+  font-family: "Roboto", sans-serif;
+}
+
+p {
+  font-size: 40px;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 75vh;
+}
+
+#loginform {
+  background-color: #b69fd5;
+  height: 100px;
+  width: 750px;
+  border-radius: 50px;
+  padding-top: 75px;
+  padding-left: 50px;
 }
 
 .calendarnav {
@@ -9,7 +31,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border: 2px solid #4E6766;
+  border: 2px solid #4e6766;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -17,7 +39,7 @@ body {
 .calendarsearch {
   display: flex;
   width: 650px;
-  background-color: #B69FD5;
+  background-color: #b69fd5;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 55px;
   border-radius: 50px;
@@ -34,7 +56,7 @@ body {
   border-radius: 30px;
   align-items: center;
   padding: 20px;
-  border: 2px solid #4E6766;
+  border: 2px solid #4e6766;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -50,18 +72,21 @@ input[type="button"],
   cursor: pointer;
   border-radius: 50vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #B69FD5;
+  background-color: #b69fd5;
   padding: 5px 5px;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
 }
 
+.none {
+  cursor: none;
+}
 h1 {
   text-align: center;
-  color: #4E6766;
-  font-family: 'Open Sans', sans-serif;
+  color: #4e6766;
+  font-family: "Open Sans", sans-serif;
 }
 
 .booking-container,
@@ -76,9 +101,9 @@ h1 {
   width: 250px;
   display: flex;
   height: 200px;
-  border: 1px solid #4E6766;
+  border: 1px solid #4e6766;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #F4FFFD;
+  background-color: #f4fffd;
   margin: 30px;
   justify-content: center;
   align-items: center;
@@ -94,9 +119,3 @@ h1 {
   display: flex;
   align-items: center;
 }
-
-
-
-
-
-

@@ -7,7 +7,17 @@
   <title>Overlook</title>
 </head>
 <body>
-  <nav class="calendarnav">
+  <section class="login-container">
+    <p>Overlook Hotel Customer Login</p>
+    <form id="loginform">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" pattern="customer([0-4][0-9]|50)" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password"  pattern="overlook2021" required>
+      <button type="submit" id="login">Login</button>
+    </form>
+  </section>
+  <nav class="calendarnav hidden">
     <div class="calendarsearch">
       <form id="myform">
         <label for="datepicker">Select a date to book a room:</label>
@@ -16,7 +26,7 @@
       </form>
     </div>
     <div class="buttonholder">
-        <form class="buttonselection hidden" >
+        <form class="buttonselection hidden">
           <label>Available room types</label>
           <input type="button" id="single" name="roomtype" value="single room">
           <label for="single"></label>
@@ -28,14 +38,14 @@
           <label for="residential suite"></label>
         </form>
     </div>
-    <section class="userdashboard">
+    <section class="userdashboard hidden">
       <h1>welcome tony</h1>
       <h2 class="usertotal">total spent:</h2>
     </section>
   </nav>
-  <main id="allbookings">
-    <h3> Past and Upcoming Bookings</h2>
-    <div class="booking-container">
+  <main id="allbookings hidden">
+    <h3 class="hidden"> Past and Upcoming Bookings</h3>
+    <div class="booking-container hidden">
       <!-- Bookings go here -->
     </div>
     <div class="bydate hidden">

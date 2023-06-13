@@ -21,6 +21,7 @@ import {
   findAvailableRooms,
   filterByType,
 } from "./filter-functions";
+import { bookingData } from "../test/sampleData";
 
 //GLOBAL VARIABLE
 let currentCustomer;
@@ -28,7 +29,6 @@ let bookingdata;
 let customerData;
 let roomData;
 let dateMatchedArray;
-
 
 //QUERY SELECTORS
 const userTotal = document.querySelector(".usertotal");
@@ -41,14 +41,22 @@ const roomTypeButtonHolder = document.querySelector(".buttonholder");
 const form = document.querySelector(".buttonselection");
 const customerWelcome = document.querySelector("h1");
 const bookingTitle = document.querySelector("h3");
-datePicker.min = new Date().toJSON().slice(0, 10);
+const loginForm = document.getElementById("loginform");
+const passwordEntry = document.querySelector("#username");
+const calendarNavContainer = document.querySelector(".calendarnav");
+const butttonForm = document.querySelector(".buttonselection");
+const userDashboard = document.querySelector(".userdashboard");
+const loginContainer = document.querySelector(".login-container");
 
-const start = () => {
-  assignPromises().then((data) => {
+const start = (id) => {
+  assignPromises(id).then((data) => {
+    console.log(data);
     customerData = data[0].customers;
     bookingdata = data[1].bookings;
     roomData = data[2].rooms;
-    currentCustomer = getRandomCustomer(customerData);
+    console.log("customerdata", customerData);
+    currentCustomer = data[3];
+
     currentCustomer.totalPrice = calculatePrice(
       currentCustomer,
       bookingdata,
@@ -59,39 +67,56 @@ const start = () => {
       bookingdata,
       roomData
     );
+
+    hideDomElement(loginContainer);
+    showDomElement(calendarNavContainer);
+    showDomElement(bookingTitle);
+    showDomElement(userDashboard);
+    showDomElement(bookingContainer);
     renderMessage(userTotal, `Your total spent: ${currentCustomer.totalPrice}`);
     renderMessage(customerWelcome, `Welcome ${currentCustomer.name}`);
     renderBookedRooms(customerBookings, bookingContainer);
-    
+    datePicker.min = new Date().toISOString().split("T")[0];
   });
 };
 
 //EVENT LISTENERS
-window.addEventListener("load", start);
 datePicker.addEventListener("input", () => {
   calendarSubmitButton.disabled = false;
 });
 calendarSubmitButton.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log(dateMatchedArray);
   dateMatchedArray = findAvailableRooms(startDate.value, roomData, bookingdata);
   if (dateMatchedArray.length === 0) {
     alert("none for you");
   }
-  console.log("datematched", dateMatchedArray);
+
   hideDomElement(bookingContainer);
   showDomElement(byDateContainer);
   showDomElement(form);
-
   renderRoomsToBook(dateMatchedArray, byDateContainer, bookingTitle);
-
+  renderMessage(
+    bookingTitle,
+    `All rooms available on ${startDate.value.split("-").join("/")}`
+  );
 });
 
-const getBack = () => {
-  assignPromises().then((data) => {
+const getID = (pw) => {
+  return pw.split("").slice(-2).join("");
+};
+
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const id = getID(passwordEntry.value);
+  start(id);
+});
+
+const getBack = (id) => {
+  assignPromises(id).then((data) => {
     customerData = data[0].customers;
     bookingdata = data[1].bookings;
     roomData = data[2].rooms;
+    currentCustomer = data[3];
   });
 };
 
@@ -111,19 +136,18 @@ roomTypeButtonHolder.addEventListener("click", (e) => {
 });
 
 byDateContainer.addEventListener("click", (e) => {
-  console.log("startdate", startDate.value);
   let roomnumber;
   if (e.target.id === "booknow") {
     roomnumber = e.target.parentNode.id;
-    console.log(typeof roomnumber);
+    e.target.disabled = true;
+    e.target.value = "Booked!";
     postAPI({
       userID: currentCustomer.id,
       date: startDate.value.split("-").join("/"),
       roomNumber: parseInt(roomnumber),
     })
       .then(() => {
-        getBack();
-        console.log("boookiinngg", bookingdata);
+        getBack(currentCustomer.id);
       })
       .catch((error) => {
         console.log(error);
