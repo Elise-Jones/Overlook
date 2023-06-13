@@ -69,7 +69,6 @@ loginForm.addEventListener("submit", (e) => {
   start(id);
 });
 
-
 roomTypeButtonHolder.addEventListener("click", (e) => {
   let roomTypeArray = filterByType(dateMatchedArray, e.target.value);
   if (roomTypeArray.length === 0) {
@@ -115,7 +114,6 @@ const start = (id) => {
       bookingdata,
       roomData
     );
-
     hideDomElement(loginContainer);
     showDomElement(calendarNavContainer);
     showDomElement(bookingTitle);

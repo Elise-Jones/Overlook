@@ -1,15 +1,15 @@
 const fetchAPI = (dataType) => {
   return fetch(`http://localhost:3001/api/v1/${dataType}`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Server error');
-    }
-    return response.json();
-  })
-  .catch(err => {
-    console.log('Error:', err);
-    alert(err)
-  });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Server error");
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+      alert(err);
+    });
 };
 
 const assignPromises = (id) => {
@@ -30,18 +30,20 @@ const getSingleCustomer = (id) => {
 };
 
 const postAPI = (customer) => {
-    return fetch("http://localhost:3001/api/v1/bookings", {
-      method: "POST",
-      body: JSON.stringify(customer),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  return fetch("http://localhost:3001/api/v1/bookings", {
+    method: "POST",
+    body: JSON.stringify(customer),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(
+        `You booked room number ${data.newBooking.roomNumber} on ${data.newBooking.date}`
+      );
     })
-      .then((response) => response.json())
-      .then((data) => { 
-        alert(`You booked room number ${data.newBooking.roomNumber} on ${data.newBooking.date}`)
-      })
-      .catch((err) => alert(err));
+    .catch((err) => alert(err));
 };
 
 export { fetchAPI, postAPI, assignPromises, getSingleCustomer };
