@@ -28,7 +28,6 @@ const filterAlreadyBookedRooms = (currentCustomer, bookingData, roomData) => {
 
 
 const findAvailableRooms = (selectedDate, rooms, bookings) => {
-  
   const filteredRooms = bookings.filter((booking) => {
     return booking.date === selectedDate.split('-').join('/')
   });
@@ -36,10 +35,8 @@ const findAvailableRooms = (selectedDate, rooms, bookings) => {
     return room.roomNumber});
   const availableRooms = rooms.filter((room) => {
     return !unavailableRooms.includes(room.number)});
-    
-    
     if(availableRooms.length === 0){
-      return `Sorry There are no available rooms that day.`
+      return `Sorry there are no available rooms that day.`
     }
   return availableRooms
 }

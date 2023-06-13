@@ -239,7 +239,7 @@ describe("findAvailableRooms", () => {
     const dateValue2 = "2026-01-01";
     const bookedrooms4 = findAvailableRooms(dateValue2, [], bookingData);
     expect(bookedrooms4).to.equal(
-      "Sorry There are no available rooms that day."
+      "Sorry there are no available rooms that day."
     );
   });
 });

@@ -3,7 +3,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-p {
+header, p {
   font-size: 40px;
 }
 
@@ -28,8 +28,9 @@ p {
 .calendarnav {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  height: 400px;
   padding: 20px;
   border: 2px solid #4e6766;
   border-radius: 10px;
@@ -80,9 +81,6 @@ input[type="button"],
   text-transform: uppercase;
 }
 
-.none {
-  cursor: none;
-}
 h1 {
   text-align: center;
   color: #4e6766;
@@ -118,4 +116,8 @@ h1 {
 .buttonholder {
   display: flex;
   align-items: center;
+}
+
+h3 {
+  text-align: center;
 }
