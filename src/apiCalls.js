@@ -8,21 +8,25 @@ const fetchAPI = (dataType) => {
 };
 
 const assignPromises = () => {
- return Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms')])
+ return Promise.all([fetchAPI('customers'), fetchAPI('bookings'), fetchAPI('rooms'), getSingleCustomer(50)])
 }
+
+
 
 const errorHandling = (err) => {
   alert(`${err.name}: ${err.message}!\nOverlook failed to obtain data from the server.`);
 };
 
-const getSingleUser = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/<${id}>`)
+const getSingleCustomer = (id) => {
+  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
     .then((response) => {
       return response.json();
     })
     .catch((err) => errorHandling(err));
 };
-
+// const ta = () => {
+//   return Promise.all([getSingleCustomer(50)])
+// }
 const postAPI = (customer) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
@@ -42,4 +46,6 @@ const postAPI = (customer) => {
 }
 
 
-export { fetchAPI, postAPI, assignPromises, getSingleUser }
+export { fetchAPI, postAPI, assignPromises, getSingleCustomer, 
+  // ta
+ }

@@ -40,19 +40,22 @@ const roomTypeButtonHolder = document.querySelector(".buttonholder");
 const form = document.querySelector(".buttonselection");
 const customerWelcome = document.querySelector("h1");
 const bookingTitle = document.querySelector("h3");
-const loginForm = document.getElementById("loginform")
-const userNameEntry = document.querySelector("#username")
-const passwordEntry = document.querySelector("#username")
+const loginForm = document.getElementById("loginform");
+const userNameEntry = document.querySelector("#username");
+const passwordEntry = document.querySelector("#username");
+const calendarNavContainer = document.querySelector(".calendarnav");
+const butttonForm = document.querySelector(".buttonselection");
+const userDashboard = document.querySelector(".userdashboard");
 
 const start = () => {
   assignPromises().then((data) => {
-
-   
+    console.log(data);
     customerData = data[0].customers;
     bookingdata = data[1].bookings;
     roomData = data[2].rooms;
-    console.log("customerdata", customerData)
-    currentCustomer = getRandomCustomer(customerData);
+    console.log("customerdata", customerData);
+    currentCustomer = data[3];
+
     currentCustomer.totalPrice = calculatePrice(
       currentCustomer,
       bookingdata,
@@ -63,15 +66,23 @@ const start = () => {
       bookingdata,
       roomData
     );
+    hideDomElement(loginForm);
+    showDomElement(calendarNavContainer);
+    showDomElement(bookingTitle);
+    showDomElement(userDashboard);
+    showDomElement(bookingContainer);
+    // showDomElement(customerWelcome)
+
     renderMessage(userTotal, `Your total spent: ${currentCustomer.totalPrice}`);
     renderMessage(customerWelcome, `Welcome ${currentCustomer.name}`);
     renderBookedRooms(customerBookings, bookingContainer);
     datePicker.min = new Date().toISOString().split("T")[0];
+    console.log(currentCustomer);
   });
 };
 
 //EVENT LISTENERS
-window.addEventListener("load", start);
+// window.addEventListener("load", start);
 datePicker.addEventListener("input", () => {
   calendarSubmitButton.disabled = false;
 });
@@ -94,14 +105,11 @@ calendarSubmitButton.addEventListener("click", (e) => {
   );
 });
 
-loginForm.addEventListener('submit',(e)=>{
-  e.preventDefault()
-  
-    hideDomElement(loginForm)
-    showDomElement(bookingTitle)
-  
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  start();
+});
 
-})
 const getBack = () => {
   assignPromises().then((data) => {
     customerData = data[0].customers;
