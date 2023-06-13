@@ -77,6 +77,7 @@ const start = () => {
     renderMessage(userTotal, `Your total spent: ${currentCustomer.totalPrice}`);
     renderMessage(customerWelcome, `Welcome ${currentCustomer.name}`);
     renderBookedRooms(customerBookings, bookingContainer);
+    console.log(customerBookings)
     datePicker.min = new Date().toISOString().split("T")[0];
     console.log(currentCustomer);
   });
@@ -98,8 +99,8 @@ calendarSubmitButton.addEventListener("click", (e) => {
   hideDomElement(bookingContainer);
   showDomElement(byDateContainer);
   showDomElement(form);
-
-  renderRoomsToBook(dateMatchedArray, byDateContainer);
+console.log(dateMatchedArray)
+  renderRoomsToBook(dateMatchedArray, byDateContainer, bookingTitle);
   renderMessage(
     bookingTitle,
     `All rooms available on ${startDate.value.split("-").join("/")}`
