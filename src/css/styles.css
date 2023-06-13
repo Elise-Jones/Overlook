@@ -6,6 +6,9 @@ body {
 p {
   font-size: 40px;
 }
+header {
+  font-size: 40px;
+}
 
 .login-container {
   display: flex;
@@ -28,8 +31,10 @@ p {
 .calendarnav {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  /* margin-bottom: 20px; */
+  height: 400px;
   padding: 20px;
   border: 2px solid #4e6766;
   border-radius: 10px;
@@ -50,6 +55,7 @@ p {
 }
 
 .userdashboard {
+  /* margin-top: 20px; */
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -80,9 +86,7 @@ input[type="button"],
   text-transform: uppercase;
 }
 
-.none {
-  cursor: none;
-}
+
 h1 {
   text-align: center;
   color: #4e6766;
@@ -118,4 +122,8 @@ h1 {
 .buttonholder {
   display: flex;
   align-items: center;
+}
+
+h3 {
+  text-align: center;
 }
